@@ -34,7 +34,6 @@ public class Ball extends DrawObject {
     private int radius;
 
     private boolean gameover;
-    private double angleOffset;
 
     public Ball(GraphicsContext graphicsContext, Paddle paddleOne, Paddle paddleTwo, OnPointListener onPointListener) {
         super(graphicsContext);
@@ -42,7 +41,6 @@ public class Ball extends DrawObject {
         this.paddleTwo = paddleTwo;
         this.onPointListener = onPointListener;
         radius = 10;
-        angleOffset = 0;
     }
 
     public void draw(double width, double height) {
@@ -70,7 +68,6 @@ public class Ball extends DrawObject {
 
         if (touchedWall(height)) velocity.y *= -1;
 
-        position.y += angleOffset;
         if (position.x >= 0 && position.x <= width) {
             getGraphicsContext().setFill(Color.RED);
             getGraphicsContext().fillOval(position.x - radius, position.y - radius, radius, radius);
@@ -85,7 +82,6 @@ public class Ball extends DrawObject {
         position = null;
         velocity = null;
         gameover = false;
-        angleOffset = 0;
     }
 
     private boolean touchedWall(double wallHeight) {
@@ -116,11 +112,9 @@ public class Ball extends DrawObject {
                         return -2;
                     case 3:
                         return 2;
-                    case 2:
-                        return 0;
                 }
         }
-        return angleOffset;
+        return 0;
     }
 
     public interface OnPointListener {
