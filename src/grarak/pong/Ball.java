@@ -80,12 +80,12 @@ public class Ball extends DrawObject {
 
     public void reset() {
         position = null;
-        velocity = null;
+        velocity.y = 0;
         gameover = false;
     }
 
     private boolean touchedWall(double wallHeight) {
-        return position.y <= 0 || position.y >= wallHeight;
+        return position.y - radius <= 0 || position.y + radius >= wallHeight;
     }
 
     private boolean touchedPaddle(Paddle paddle) {
